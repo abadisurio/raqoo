@@ -1,81 +1,143 @@
-import React from 'react'
+import axios from 'axios';
+import React, {useState, useEffect} from 'react'
 
 const Register = () => {
 
-    const province = [
+    const [isLoading, setLoading] = useState(true);
+    const [listProvinsi, setListProvinsi] = useState([]);
+    const [listKota, setListKota] = useState([]);
+    const [listKecamatan, setListKecamatan] = useState([]);
+    const [listKelurahan, setListKelurahan] = useState([]);
+    const [provinsi, setProvinsi] = useState(0);
+    const [kota, setKota] = useState(0);
+    const [kecamatan, setKecamatan] = useState(0);
+    const [kelurahan, setKelurahan] = useState(0);
+
+    const baseURL = 'https://dev.farizdotid.com/api/daerahindonesia';
+
+    const loadProvinsi = async () => {
+        setLoading(true);
+        await axios.get(`${baseURL}/provinsi`)
+            .then((response)=>{
+                // console.log(response.data.provinsi)
+                // console.log(isLoading)
+                setListProvinsi(response.data.provinsi)
+                setLoading(false);
+            });
+    }
+
+    useEffect(() => {
+        loadProvinsi();
+    }, [])
+
+    useEffect(() => {
         
-    ]
+        const loadKota = async () => {
+            setLoading(true);
+            await axios.get(`${baseURL}/kota?id_provinsi=${provinsi}`)
+                .then((response)=>{
+                    console.log(response.data.kota_kabupaten)
+                    // console.log(isLoading)
+                    setListKota(response.data.kota_kabupaten)
+                    setLoading(false);
+                });
+        }
+        const loadKecamatan = async () => {
+            setLoading(true);
+            await axios.get(`${baseURL}/kecamatan?id_kota=${kota}`)
+                .then((response)=>{
+                    console.log(response.data.kecamatan)
+                    // console.log(isLoading)
+                    setListKecamatan(response.data.kecamatan)
+                    setLoading(false);
+                });
+        }
+        const loadKelurahan = async () => {
+            setLoading(true);
+            await axios.get(`${baseURL}/kelurahan?id_kecamatan=${kecamatan}`)
+                .then((response)=>{
+                    console.log(response.data.kelurahan)
+                    // console.log(isLoading)
+                    setListKelurahan(response.data.kelurahan)
+                    setLoading(false);
+                });
+        }
 
-
-    const forms = [
-        {
-            name: 'One',
-            title: 'Informasi Dasar',
-            content: (
-                <>
-                    <div class="mb-3">
-                        <label for="NIK" class="form-label">Nomor Induk Kependudukan (NIK)</label>
-                        <input type="number" class="form-control" id="NIK" placeholder="1234567890123456"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama Lengkap</label>
-                        <input type="text" class="form-control" id="nama" placeholder="Will Smith"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="no_hp" class="form-label">Nomor Ponsel</label>
-                        <input type="number" class="form-control" id="no_hp"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Alamat Email</label>
-                        <input type="text" class="form-control" id="email"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="alamat" class="form-label">Alamat</label>
-                        <input type="text" class="form-control" id="alamat"/>
-                    </div>
-                </>
-            )
-        },
-        {
-            name: 'One',
-            title: 'Informasi Dasar',
-            content: (
-                <>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com"/>
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                </>
-            )
-        },
-    ]
+        (provinsi !== 0) && loadKota();
+        (kota !== 0) && loadKecamatan();
+        (kecamatan !== 0) && loadKelurahan();
+        // kelurahan != 0 && loadKota();
+        // console.log('hehe')
+    }, [provinsi, kota, kecamatan, kelurahan])
 
     return (
         <div>
             <div className="container">
-                <h1>Ini Register</h1>
-                <div class="progress">
-                    <div class="progress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <h1>Ini Register {isLoading && "Loading"} </h1>
+                <div className="progress">
+                    <div className="progress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
-                <div className="accordion accordion-flush" id="accordionFlushForm">
-                    {forms.map((item, index)=> {
-                        return (
-                            <div className="accordion-item">
-                                <h2 className="accordion-header" id={`flush-heading${item.name}`}>
-                                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target={`#flush-collapse${item.name}`} aria-expanded="false" aria-controls={`flush-collapse${item.name}`}>
-                                    {item.title}
-                                </button>
-                                </h2>
-                                <div id={`flush-collapse${item.name}`} className="accordion-collapse collapse" aria-labelledby={`flush-heading${item.name}`} data-bs-parent="#accordionFlushForm">
-                                    <div className="accordion-body">{item.content}</div>
-                                </div>
-                            </div>
-                        )
-                    })}
+                <div className="row">
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="NIK" className="form-label">Nomor Induk Kependudukan (NIK)</label>
+                        <input type="number" className="form-control" id="NIK" placeholder="1234567890123456"/>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="nama" className="form-label">Nama Lengkap</label>
+                        <input type="text" className="form-control" id="nama" placeholder="Will Smith"/>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="no_hp" className="form-label">Nomor Ponsel</label>
+                        <input type="number" className="form-control" id="no_hp"/>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input type="text" className="form-control" id="email"/>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="alamat" className="form-label">Alamat</label>
+                        <input type="text" className="form-control" id="alamat"/>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="alamat" className="form-label">Provinsi</label>
+                        <select value={provinsi} className="form-select" aria-label="provinsi" onChange={event => setProvinsi(event.target.value)}>
+                            <option value={0} >Pilih terlebih dahulu</option>
+                            {listProvinsi.map((item, index)=> {
+                                // console.log(item);
+                                return <option key={index} value={item.id}>{item.nama}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="alamat" className="form-label">Kota/Kabupaten</label>
+                        <select value={kota} className="form-select" aria-label="provinsi" onChange={event => setKota(event.target.value)}>
+                            {provinsi===0 && <option>Pilih provinsi terlebih dahulu</option>}
+                            {listKota.map((item, index)=> {
+                                // console.log(item);
+                                return <option key={index} value={item.id}>{item.nama}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="alamat" className="form-label">Kecamatan</label>
+                        <select value={kecamatan} className="form-select" aria-label="provinsi" onChange={event => setKecamatan(event.target.value)}>
+                            {kota === 0 && <option>Pilih kota/kabupaten terlebih dahulu</option>}
+                            {listKecamatan.map((item, index)=> {
+                                // console.log(item);
+                                return <option key={index} value={item.id}>{item.nama}</option>
+                            })}
+                        </select>
+                    </div>
+                    <div className="col-md-6 mb-3">
+                        <label htmlFor="alamat" className="form-label">Kelurahan</label>
+                        <select value={kelurahan} className="form-select" aria-label="provinsi" onChange={event => setKelurahan(event.target.value)}>
+                            {kecamatan === 0 && <option>Pilih kelurahan terlebih dahulu</option>}
+                            {listKelurahan.map((item, index)=> {
+                                // console.log(item);
+                                return <option key={index} value={item.id}>{item.nama}</option>
+                            })}
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
