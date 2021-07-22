@@ -8,7 +8,7 @@ import pages from './pages'
 import './App.css';
 
 function App() {
-  console.log(routes)
+  // console.log(routes)
   return (
     <Router>
       <Switch>
