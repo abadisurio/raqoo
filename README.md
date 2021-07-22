@@ -1,4 +1,4 @@
 # Raqoo
-## _Medical facility companion apps_
+## _Medical facility vaccination companion apps_
 
-![alt text](https://github.com/abadisurio/raqoo/public/raqoo.jpeg?raw=true)
+![alt text](https://raw.githubusercontent.com/abadisurio/raqoo/main/public/raqoo.jpeg?raw=true)
