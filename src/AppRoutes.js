@@ -7,9 +7,9 @@ const routes = [
 ]
 
 const routesSignedIn = [
-    { path: '/schedule', pageName: 'SignIn' },
-    { path: '/notification', pageName: 'Dashboard' },
-    { path: '/profile', pageName: 'Landing' },
+    { path: '/schedule', pageName: 'Schedule' },
+    { path: '/notification', pageName: 'Notification' },
+    { path: '/profile', pageName: 'Profile' },
     { path: '/', pageName: 'Dashboard' },
 ]
 
