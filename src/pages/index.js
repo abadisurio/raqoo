@@ -6,6 +6,7 @@ import Notification from './Notification'
 import Profile from './Profile'
 import Result from './Result'
 import Schedule from './Schedule'
+import Registration from './Registration'
 
 const pages = {
     "Landing": Landing, 
@@ -16,6 +17,7 @@ const pages = {
     "Profile": Profile,
     "Result": Result,
     "Schedule": Schedule,
+    "Registration": Registration
 }
 
 export default pages
