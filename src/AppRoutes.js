@@ -3,8 +3,14 @@
 const routes = [
     { path: '/register', pageName: 'Register' },
     { path: '/signin', pageName: 'SignIn' },
-    { path: '/dashboard', pageName: 'Dashboard' },
     { path: '/', pageName: 'Landing' },
 ]
 
-export default routes
+const routesSignedIn = [
+    { path: '/schedule', pageName: 'SignIn' },
+    { path: '/notification', pageName: 'Dashboard' },
+    { path: '/profile', pageName: 'Landing' },
+    { path: '/', pageName: 'Dashboard' },
+]
+
+export {routes, routesSignedIn}
