@@ -38,3 +38,7 @@ code {
 .ft-tiny{
   font-size: 10px;
 }
+
+.width-4{
+  width: 4.5rem;
+}
