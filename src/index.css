@@ -42,3 +42,7 @@ code {
 .width-4{
   width: 4.5rem;
 }
+
+.zindex-super{
+  z-index: 1100;
+}
