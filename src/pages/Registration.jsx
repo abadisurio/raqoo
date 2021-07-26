@@ -1,10 +1,47 @@
-import React, {useState} from 'react'
-import {TextField, FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Button} from '@material-ui/core';
+import React, { useState } from 'react'
+import {format} from 'date-fns';
+import idLocale from 'date-fns/locale/id';
+import Grid from '@material-ui/core/Grid';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
+import {
+    FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Container, Button,
+    TextField, List, ListItem, ListItemIcon, ListItemText, Box, Typography, Paper,
+    Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
+} from '@material-ui/core';
 import {LocationOn} from '@material-ui/icons';
+import { useHistory } from "react-router-dom";
 
 const Registration = () => {
 
     const [service, setService] = useState('');
+    const [test, setTest] = useState('');
+    const [selectedFacility, setFacility] = useState(0);
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [selectedSession, setSession] = useState('');
+    const [open, setOpen] = useState(false);
+    const sessionStarted = 6;
+    const sessions = [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 12]
+
+    const history = useHistory();
+
+    const submitForm = () => {
+        console.log("kirim");
+        history.push("/schedule");
+    }
+
+    const services = {
+        'vaksinasi': 'Vaksinasi',
+        'tes_covid': 'Test Covid-19'
+    }
+    const testkind = {
+        'rapid': 'Rapid',
+        'swab': 'Swab',
+        'pcr': 'Polymerase Chain Reaction (PCR)',
+    }
 
     const facilities = [
         {
@@ -12,23 +49,23 @@ const Registration = () => {
             'location': 'Jakarta'
         },
         {
-            'name': 'RS Manakek',
+            'name': 'RS tsgrhsrth',
             'location': 'Bekasi'
         },
         {
-            'name': 'RS Manakek',
+            'name': 'RS Mahsrhurgtynakek',
             'location': 'Bandung'
         },
         {
-            'name': 'RS Manakek',
+            'name': 'RS Manakq4eq4eek',
             'location': 'Jakarta'
         },
         {
-            'name': 'RS Manakek',
+            'name': 'RS rtfdghyrjuhManakek',
             'location': 'Jakarta'
         },
         {
-            'name': 'RS Manakek',
+            'name': 'RS Manaktrgyhrgtek',
             'location': 'Jakarta'
         },
     ]
@@ -37,10 +74,15 @@ const Registration = () => {
         {
             'name': 'Pilih jenis layanan',
             'content': (
-                <div className="bg-white rounded-4 card-body border">
+                <Box borderRadius={16} border={1} borderColor="primary.light" p={2}>
+
                     <FormControl className='w-100' component="fieldset">
                         <FormLabel component="legend">Jenis layanan</FormLabel>
-                        <RadioGroup row aria-label="gender" name="row-radio-buttons-group" value={service} onChange={e => setService(e.target.value)} >
+                        <RadioGroup row 
+                            aria-label="service" 
+                            name="row-radio-buttons-group" 
+                            value={service} 
+                            onChange={e => setService(e.target.value)} >
                             <FormControlLabel value="vaksinasi" control={<Radio />} label="Vaksinasi" />
                             <FormControlLabel value="tes_covid" control={<Radio />} label="Test Covid-19" />
                         </RadioGroup>
@@ -48,84 +90,175 @@ const Registration = () => {
                     {service === 'tes_covid' && (
                         <FormControl className='w-100 mt-3' component="fieldset">
                             <FormLabel component="legend">Jenis test</FormLabel>
-                            <RadioGroup row aria-label="gender" name="row-radio-buttons-group">
+                            <RadioGroup row 
+                                aria-label="testkind" 
+                                name="row-radio-buttons-group"
+                                onChange={e => setTest(e.target.value)} >
                                 <FormControlLabel value="rapid" control={<Radio />} label="Rapid" />
                                 <FormControlLabel value="swab" control={<Radio />} label="Swab" />
                                 <FormControlLabel value="pcr" control={<Radio />} label="Polymerase Chain Reaction (PCR)" />
                             </RadioGroup>
                         </FormControl>
                     )}
-                </div>
+                </Box>
             )
         },
         {
             'name': 'Pilih lokasi fasilitas kesehatan',
             'content': (
-                <div className="bg-white rounded-4 card-body border">
-                    <div >
-                        <TextField className='w-100' id="standard-search" label="Search field" type="search" />
-                    </div>
-                    <div className="mt-3 row mx-0">
+                <Box borderRadius={16} border={1} borderColor="primary.light" p={2}>
+                    <Box mb={3} textAlign="center">
+                        <Typography variant="h6"><LocationOn /> {facilities[selectedFacility].name}</Typography>
+                    </Box>
+                    <Box mb={3}>
+                        <TextField width="100%" id="outlined-basic" label="Outlined" variant="outlined" fullWidth/>
+                    </Box>
+                    <List component="nav" aria-label="main mailbox folders">
                         {facilities.map((item, index)=>{
+                            // <button variant="text" className='btn btn-light text-start' >
+                            // </button>
                             return (
-                                <Button variant="text" className='mt-1' startIcon={<LocationOn />} >
-                                    {item.name} | {item.location}
-                                </Button>
+                                <ListItem
+                                    selected={selectedFacility === index}
+                                    key={index}
+                                    button
+                                    onClick={() => setFacility(index)}>
+                                    <ListItemIcon>
+                                        <LocationOn />
+                                    </ListItemIcon>
+                                    <ListItemText primary={item.location + " | " + item.name} />
+                                </ListItem>
                             )
                         })}
-                    </div>
-                </div>
+                    </List>
+                </Box>
             )
         },
         {
             'name': 'Pilih tanggal layanan',
             'content': (
-                <div className="bg-white rounded-4 card-body border">
-                    <h1>hehe</h1>
-                    <h1>hehe</h1>
-                </div>
+                <Box borderRadius={16} border={1} borderColor="primary.light" p={2}>
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <Grid container justifyContent="space-around">
+                            <KeyboardDatePicker
+                                margin="normal"
+                                id="date-picker-dialog"
+                                label="Date picker dialog"
+                                format="EEEE, dd MMM yyyy"
+                                value={selectedDate}
+                                onChange={date => setSelectedDate(date)}
+                                KeyboardButtonProps={{
+                                    'aria-label': 'change date',
+                                }}
+                            />
+                        </Grid>
+                    </MuiPickersUtilsProvider>
+                </Box>
             )
         },
         {
             'name': 'Pilih sesi layanan',
             'content': (
-                <div className="bg-white rounded-4 card-body border">
-                    <h1>hehe</h1>
-                    <h1>hehe</h1>
-                </div>
+                <Box borderRadius={16} border={1} borderColor="primary.light" p={2}>
+                    <Grid container spacing={1}>
+                        {sessions.map((item, index)=>{
+                            return(
+                                <Grid item key={index} xs={4}>
+                                    <Box textAlign="center">
+                                        <Button
+                                            variant="contained"
+                                            disabled={item===0}
+                                            fullWidth color={(selectedSession === item) ? "primary" : "default" }
+                                            onClick={() => setSession(item)}>
+                                            {(item+sessionStarted)+".00 - " + (item+sessionStarted+1) + ".00"}
+                                        </Button>
+                                    </Box>
+                                </Grid>
+                            )
+                        })}
+                    </Grid>
+                </Box>
+            )
+        },
+        {
+            'name': 'Konfirmasi reservasi',
+            'content': (
+                <>
+                <Dialog
+                    open={open}
+                    onClose={()=>setOpen(false)}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Apakah Anda sudah yakin?"}</DialogTitle>
+                    <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        Reservasi akan diproses
+                    </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                    <Button onClick={()=>setOpen(false)} color="primary">
+                        Batal
+                    </Button>
+                    <Button onClick={submitForm} color="primary" autoFocus>
+                        Proses
+                    </Button>
+                    </DialogActions>
+                </Dialog>
+                <Paper elevation={3}>
+                    <Box p={2}>
+                        <h6><strong>Jenis pelayanan</strong></h6>
+                        <h6>{services[service]}</h6>
+                        {service === 'tes_covid' && (<>
+                            <h6 className="mt-3"><strong>Jenis tes</strong></h6>
+                            <h6>{testkind[test]}</h6>
+                        </>)}
+                        <h6 className="mt-3"><strong>Lokasi</strong></h6>
+                        <h6>{facilities[selectedFacility].name}</h6>
+                        <h6 className="mt-3"><strong>Tanggal</strong></h6>
+                        <h6>{format(selectedDate, "EEEE, dd MMMM yyyy", {locale: idLocale })}</h6>
+                        <h6 className="mt-3"><strong>Sesi</strong></h6>
+                        <h6>{selectedSession}</h6>
+                        <h6 className="mt-3 text-end">
+                            <Button variant="contained" color="primary" onClick={() => setOpen(!open)}>
+                                Open alert dialog
+                            </Button>
+                        </h6>
+                    </Box>
+                </Paper>
+                </>
             )
         },
     ]
 
     return (
-        <div className="container">
-            <div className="py-5 my-5">
+        <Container maxWidth="md">
+            <Box py={3} my={3}>
                 <div className="position-relative my-2 clearfix">
-                    <div className="top-0 start-0 w-100 btn-secondary rounded-4 overflow-hidden">
-                        <img className="image-cover w-100" height="300" src="https://images.pexels.com/photos/127873/pexels-photo-127873.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=300" alt="" />
-                    </div>
                     <div className="text-center my-5">
                         <h1>Temukan fasilitas kesehatan yang cocok dengan Anda</h1>
                         <h6>Your vaccination companion</h6>
                     </div>
                 </div>
-            </div>
+            </Box>
             {forms.map((item, index)=> {
                 return (
-                    <div key={index} className="row mb-3">
-                        <div className="col-md-6">
-                            <div className="sticky-top pt-3 mb-3">
-                                <h3 className='text-muted'>Langkah {index+1}</h3>
-                                <h1>{item.name}</h1>
-                            </div>
-                        </div>
-                        <div className="col-md-6">
-                            {item.content}
-                        </div>
-                    </div>
+                    <Box key={index} mb={3}>
+                        <Grid container spacing={3}>
+                            <Grid item xs={12} sm={5} md={6}>
+                                <div className="sticky-top pt-3">
+                                    <h3 className='text-muted'>Langkah {index+1}</h3>
+                                    <h1>{item.name}</h1>
+                                </div>
+                            </Grid>
+                            <Grid item xs={12} sm={7} md={6}>
+                                {item.content}
+                            </Grid>
+                        </Grid>
+                    </Box>
                 )
             })}
-        </div>
+        </Container>
     )
 }
 
