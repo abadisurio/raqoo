@@ -11,8 +11,6 @@ import { Box } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: 345,
-    borderRadius: 12,
     marginBottom: '1rem'
   },
   media: {
@@ -29,8 +27,8 @@ export default function MediaCard({imageSource = null, title = null, caption = n
         {imageSource && (
           <CardMedia
             className={classes.media}
-            image="/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
+            image={imageSource}
+            title={title}
           />
         )}
         <CardContent>
