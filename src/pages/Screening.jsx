@@ -159,7 +159,7 @@ const Screening = () => {
         'shortAnswer': (item, questionNumber) => (
             <TextField
                 fullWidth
-                id="standard-basic"
+                id={"standard-basic"+questionNumber}
                 label="Isi dengan singkat"
                 variant="standard"
                 onChange={e => setAnswer({...answer, [questionNumber]: e.target.value})}    
