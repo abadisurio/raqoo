@@ -10,10 +10,10 @@ import {
 import {
     FormControl, FormLabel, RadioGroup, Radio, FormControlLabel, Container, Button,
     TextField, List, ListItem, ListItemIcon, ListItemText, Box, Typography, Paper,
-    Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle
 } from '@material-ui/core';
 import {LocationOn} from '@material-ui/icons';
 import { useHistory } from "react-router-dom";
+import {Dialog} from '../components';
 
 const Registration = () => {
 
@@ -22,15 +22,15 @@ const Registration = () => {
     const [selectedFacility, setFacility] = useState(0);
     const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedSession, setSession] = useState('');
-    const [open, setOpen] = useState(false);
+    const [isOpen, setOpen] = useState(false);
     const sessionStarted = 6;
     const sessions = [1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11, 12]
 
     const history = useHistory();
 
-    const submitForm = () => {
+    const handleSubmit = () => {
         console.log("kirim");
-        history.push("/schedule");
+        history.push("/screening");
     }
 
     const services = {
@@ -184,27 +184,8 @@ const Registration = () => {
             'name': 'Konfirmasi reservasi',
             'content': (
                 <>
-                <Dialog
-                    open={open}
-                    onClose={()=>setOpen(false)}
-                    aria-labelledby="alert-dialog-title"
-                    aria-describedby="alert-dialog-description"
-                >
-                    <DialogTitle id="alert-dialog-title">{"Apakah Anda sudah yakin?"}</DialogTitle>
-                    <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Reservasi akan diproses
-                    </DialogContentText>
-                    </DialogContent>
-                    <DialogActions>
-                    <Button onClick={()=>setOpen(false)} color="primary">
-                        Batal
-                    </Button>
-                    <Button onClick={submitForm} color="primary" autoFocus>
-                        Proses
-                    </Button>
-                    </DialogActions>
-                </Dialog>
+                {/* <Dialog/> */}
+                <Dialog confirmAction={handleSubmit} isOpen={isOpen} setOpen={setOpen} message="Registrasi akan disimpan" />
                 <Paper elevation={3}>
                     <Box p={2}>
                         <h6><strong>Jenis pelayanan</strong></h6>
@@ -220,8 +201,8 @@ const Registration = () => {
                         <h6 className="mt-3"><strong>Sesi</strong></h6>
                         <h6>{selectedSession}</h6>
                         <h6 className="mt-3 text-end">
-                            <Button variant="contained" color="primary" onClick={() => setOpen(!open)}>
-                                Open alert dialog
+                            <Button variant="contained" color="primary" onClick={() => setOpen(!isOpen)}>
+                                Konfirmasi
                             </Button>
                         </h6>
                     </Box>
