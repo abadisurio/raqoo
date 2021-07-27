@@ -11,6 +11,7 @@ const routesSignedIn = [
     { path: '/notification', pageName: 'Notification' },
     { path: '/registration', pageName: 'Registration' },
     { path: '/profile', pageName: 'Profile' },
+    { path: '/screening', pageName: 'Screening' },
     { path: '/', pageName: 'Dashboard' },
 ]
 
