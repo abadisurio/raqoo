@@ -170,56 +170,56 @@ const Screening = () => {
     return isLoading ? <h6>is loading</h6> : (
         <Container maxWidth="md">
             <Dialog confirmAction={handleSubmit} isOpen={isOpen} setOpen={setOpen} message="Jawaban akan disimpan" />
-            <Box py={3} my={3}>
-                <div className="position-relative my-2 clearfix">
-                    <div className="text-center my-5">
-                        <h1>Temukan fasilitas kesehatan yang cocok dengan Anda</h1>
-                        <h6>Your vaccination companion</h6>
-                    </div>
-                </div>
-            </Box>
-            {questions.map((item, index)=>{
-                return(
-                    <Box key={index} mb={3}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={5} md={6}>
-                                <div className="sticky-top pt-3">
-                                    <h5 className='text-muted'>Pertanyaan {parseInt(index)+1}</h5>
-                                    <h3>{item.question}</h3>
-                                </div>
-                            </Grid>
-                            <Grid item xs={12} sm={7} md={6}>
-                                <Box borderRadius={16} border={1} borderColor="primary.light" p={2} height="100%">
-                                    {formField[item.kind](item, index)}
-                                </Box>
-                            </Grid>
-                        </Grid>
-                    </Box>
-                )
-            })}
-            <Box mb={3}>
-                <Grid container spacing={3}>
-                    <Grid item xs={12} sm={5} md={6}>
-                        <div className="sticky-top pt-3">
-                            <h3 className='text-muted'>Konfirmasi</h3>
+            <Box pb={5} mb={5}>
+                <Box py={3} my={3}>
+                    <div className="position-relative my-2 clearfix">
+                        <div className="text-center my-5">
+                            <h1>Formulir screening</h1>
+                            <h6>Your vaccination companion</h6>
                         </div>
+                    </div>
+                </Box>
+                {questions.map((item, index)=>{
+                    return(
+                        <Box key={index} mb={3}>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} sm={5} md={6}>
+                                    <div className="sticky-top pt-3">
+                                        <h5 className='text-muted'>Pertanyaan {parseInt(index)+1}</h5>
+                                        <h3>{item.question}</h3>
+                                    </div>
+                                </Grid>
+                                <Grid item xs={12} sm={7} md={6}>
+                                    <Box borderRadius={16} border={1} borderColor="primary.light" p={2} height="100%">
+                                        {formField[item.kind](item, index)}
+                                    </Box>
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    )
+                })}
+                <Box mb={3}>
+                    <Grid container spacing={3}>
+                        <Grid item xs={12} sm={5} md={6}>
+                            <div className="sticky-top pt-3">
+                                <h3 className='text-muted'>Konfirmasi</h3>
+                            </div>
+                        </Grid>
+                        <Grid item xs={12} sm={7} md={6}>
+                            <Paper elevation={3}>
+                                <Box p={2}>
+                                    <h6><strong>Simpan jawaban screening</strong></h6>
+                                    <h6 className="mt-3 text-end">
+                                        <Button variant="contained" color="primary" onClick={() => setOpen(!isOpen)}>
+                                            Simpan
+                                        </Button>
+                                    </h6>
+                                </Box>
+                            </Paper>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={7} md={6}>
-                        <Paper elevation={3}>
-                            <Box p={2}>
-                                <h6><strong>Simpan jawaban screening</strong></h6>
-                                <h6 className="mt-3 text-end">
-                                    <Button variant="contained" color="primary" onClick={() => setOpen(!isOpen)}>
-                                        Simpan
-                                    </Button>
-                                </h6>
-                            </Box>
-                        </Paper>
-                    </Grid>
-                </Grid>
+                </Box>
             </Box>
-            
-            
         </Container>
     )
 }

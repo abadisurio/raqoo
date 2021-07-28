@@ -7,7 +7,7 @@ import {
 import {routes, routesSignedIn} from './AppRoutes'
 import pages from './pages'
 import './App.css';
-import { BottomNavbar } from "./components";
+import { BottomNavbar, Scaffolding, ScrollToTop } from "./components";
 
 function App() {
   // console.log(routes)
@@ -18,12 +18,26 @@ function App() {
 
   return (
     <Router>
-      <Switch>
-        {finalRoutes.map((item, index) => {
-          return <Route key={index} path={item.path} component={pages[item.pageName]}/>
-        })}
-      </Switch>
-      {isSignedIn && <BottomNavbar/>}
+      {isSignedIn
+        ? (<>
+          <Scaffolding>
+          <ScrollToTop/>
+            <Switch>
+              {finalRoutes.map((item, index) => {
+                return <Route key={index} path={item.path} component={pages[item.pageName]}/>
+              })}
+            </Switch>
+          </Scaffolding>
+          <BottomNavbar/>
+        </>)
+        : (
+          <Switch>
+            {finalRoutes.map((item, index) => {
+              return <Route key={index} path={item.path} component={pages[item.pageName]}/>
+            })}
+          </Switch>
+        )
+      }
     </Router>
   );
 }

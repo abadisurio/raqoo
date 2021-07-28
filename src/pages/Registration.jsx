@@ -168,7 +168,8 @@ const Registration = () => {
                                         <Button
                                             variant="contained"
                                             disabled={item===0}
-                                            fullWidth color={(selectedSession === item) ? "primary" : "default" }
+                                            fullWidth
+                                            color={(selectedSession === item) ? "primary" : "default" }
                                             onClick={() => setSession(item)}>
                                             {(item+sessionStarted)+".00 - " + (item+sessionStarted+1) + ".00"}
                                         </Button>
@@ -214,31 +215,34 @@ const Registration = () => {
 
     return (
         <Container maxWidth="md">
-            <Box py={3} my={3}>
-                <div className="position-relative my-2 clearfix">
-                    <div className="text-center my-5">
-                        <h1>Temukan fasilitas kesehatan yang cocok dengan Anda</h1>
-                        <h6>Your vaccination companion</h6>
+            <Box mb={5} pb={5}>
+                <Box py={3} my={3}>
+                    <div className="position-relative my-2 clearfix">
+                        <div className="text-center my-5">
+                            <h1>Temukan fasilitas kesehatan yang cocok dengan Anda</h1>
+                            <h6>Your vaccination companion</h6>
+                        </div>
                     </div>
-                </div>
+                </Box>
+                {forms.map((item, index)=> {
+                    return (
+                        <Box key={index} mb={3}>
+                            <Grid container spacing={3}>
+                                <Grid item xs={12} sm={5}>
+                                    <div className="sticky-top pt-3">
+                                        <h5 className='text-muted'>Langkah {index+1}</h5>
+                                        <h3>{item.name}</h3>
+                                    </div>
+                                </Grid>
+                                <Grid item xs={12} sm={7} height="100%">
+                                    {item.content}
+                                </Grid>
+                            </Grid>
+                        </Box>
+                    )
+                })}
             </Box>
-            {forms.map((item, index)=> {
-                return (
-                    <Box key={index} mb={3}>
-                        <Grid container spacing={3}>
-                            <Grid item xs={12} sm={5} md={6}>
-                                <div className="sticky-top pt-3">
-                                    <h3 className='text-muted'>Langkah {index+1}</h3>
-                                    <h1>{item.name}</h1>
-                                </div>
-                            </Grid>
-                            <Grid item xs={12} sm={7} md={6}>
-                                {item.content}
-                            </Grid>
-                        </Grid>
-                    </Box>
-                )
-            })}
+
         </Container>
     )
 }
