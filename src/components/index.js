@@ -5,7 +5,8 @@ import MediaCard from './MediaCard'
 import ProfileCard from './ProfileCard'
 import Scaffolding from './Scaffolding'
 import ScrollToTop from './ScrollToTop'
+import FlatCard from './FlatCard'
 
 export {
-    BottomNavbar, SimpleList, Dialog, MediaCard, ProfileCard, Scaffolding, ScrollToTop
+    BottomNavbar, SimpleList, Dialog, MediaCard, ProfileCard, Scaffolding, FlatCard, ScrollToTop
 }
