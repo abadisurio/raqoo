@@ -7,7 +7,7 @@ const Scaffolding = ({children}) => {
             <div className="col-md-4 p-0">
                 <div className="sticky-top vh-100">
                     <div className="position-absolute top-0 start-0 w-100">
-                        <img className="w-100 vh-100 image-cover" alt="" src="https://images.pexels.com/photos/2911521/pexels-photo-2911521.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=360"/>
+                        <img className="w-100 vh-100 image-cover" alt="" src="https://images.pexels.com/photos/3685175/pexels-photo-3685175.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=350"/>
                     </div>
                     <div className="position-absolute top-0 start-0 w-100">
                         <div className="d-flex flex-column justify-content-center vh-100 align-items-center">
@@ -24,7 +24,7 @@ const Scaffolding = ({children}) => {
                 </div> */}
                 </div>
             </div>
-            <div className="col-md-8 p-0 pb-4">
+            <div className="col-md-8 p-0 pb-5">
                 <div className="sticky-top pb-5">
                     {children}
                 </div>
