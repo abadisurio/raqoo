@@ -18,7 +18,7 @@ const Result = () => {
 
     const VaccineCertificate = () => {
         return (
-            <div>
+            <div className="mb-5 pb-5" >
                 <div className="btn btn-warning card-body rounded-4">
                     <h4>Kamu telah melakukan vaksinasi dosis satu<br/>👍 ❤️ </h4>
                     <Box  display="flex" alignItems="center" >
@@ -66,7 +66,7 @@ const Result = () => {
                             <Card>
                                 <CardContent>
                                     <Grid container>
-                                        <Grid item xs={11}>
+                                        <Grid item xs={9}>
                                             <Box  display="flex" alignItems="center">
                                                 <Box mr={1}>
                                                     <LocationOn/>
@@ -87,7 +87,7 @@ const Result = () => {
                                                     </Typography>
                                                 </Box>
                                             </Box>
-                                            <Box  display="flex" alignItems="center" >
+                                            <Box  display="flex" alignItems="center" mb={1}>
                                                 <Box mr={1}>
                                                     <AccessTime />
                                                 </Box>
@@ -97,10 +97,11 @@ const Result = () => {
                                                     </Typography>
                                                 </Box>
                                             </Box>
+                                            <div className="btn btn-outline-secondary mb-1 me-2">Unduh surat hasil</div>
                                         </Grid>
-                                        <Grid item xs={1}>
+                                        <Grid item xs={3}>
                                             <div className="float-end">
-                                                <div className="btn btn-danger">Negatif</div>
+                                                <div className="btn btn-danger mb-1">Negatif</div>
                                             </div>
                                         </Grid>
                                     </Grid>
