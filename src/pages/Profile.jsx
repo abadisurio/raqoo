@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Card, Typography, CardContent, Grid } from '@material-ui/core'
+import { Box, Card, CardContent, Grid } from '@material-ui/core'
 
 const Profile = () => {
     return (
