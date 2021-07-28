@@ -8,7 +8,6 @@ const routes = [
 
 const routesSignedIn = [
     { path: '/schedule', pageName: 'Schedule' },
-    { path: '/notification', pageName: 'Notification' },
     { path: '/registration', pageName: 'Registration' },
     { path: '/profile', pageName: 'Profile' },
     { path: '/result', pageName: 'Result' },

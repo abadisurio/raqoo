@@ -10,19 +10,14 @@ const BottomNavbar = () => {
             'icon': <AccessibilityNew/>
         },
         {
-            'name': 'Schedule',
-            'path': '/schedule',
-            'icon': <Schedule/>
-        },
-        {
             'name': 'Registrasi',
             'path': '/registration',
             'icon': <AddToQueue/>
         },
         {
-            'name': 'Notifikasi',
-            'path': '/notification',
-            'icon': <Notifications/>
+            'name': 'Antrian',
+            'path': '/schedule',
+            'icon': <Schedule/>
         },
         {
             'name': 'Profile',
