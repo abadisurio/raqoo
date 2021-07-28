@@ -1,5 +1,5 @@
 import React from 'react'
-import {AccessibilityNew, Schedule, Notifications, AccountCircle, AddToQueue } from '@material-ui/icons';
+import {AccessibilityNew, Schedule, AccountCircle, AddToQueue } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 const BottomNavbar = () => {
 

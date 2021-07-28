@@ -1,7 +1,6 @@
 import React from 'react'
-// import { Link } from 'react-router-dom'
 import { Link } from 'react-router-dom';
-import { ProfileCard } from '../components';
+import { ScheduleItem } from '../components';
 
 const Dashboard = () => {
    
@@ -14,18 +13,12 @@ const Dashboard = () => {
                 </div>
                 
             </div>
-            <div className="card-body border rounded-4 mb-5">
+            <div className="bg-light card-body rounded-4 mb-5">
                 <h5>Jadwal pelayanan</h5>
-                <div className="row">
-                    <div className="col-sm-6">
-                        <h6><strong>Vaksinasi</strong></h6>
-                        <h6>Anda belum melakukan pendaftaran</h6>
-                    </div>
-                    <div className="col-sm-6">
-                        <h6><strong>Tes</strong></h6>
-                        <h6>Anda belum melakukan pendaftaran</h6>
-                    </div>
-                </div>
+                <ScheduleItem
+                    isLoading={false}
+                    { ...{'type': 'tes_covid', 'location': 'Rumah Sakit Islam Pondok Kopi', 'date': 'Jumat, 10 Juli 2021', 'session': 'Sesi 5 | 12.00 WIB'}}
+                />
             </div>
             <div className="row mb-5">
                 <div className="col-md-6 col-sm-6">

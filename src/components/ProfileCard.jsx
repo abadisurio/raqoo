@@ -1,4 +1,4 @@
-import { Avatar } from '@material-ui/core'
+import { Avatar, Typography } from '@material-ui/core'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -16,9 +16,11 @@ const ProfileCard = () => {
                             <span className='h6'>Belum divaksin</span>
                         </div>
                     </Link> */}
-                    <Link to='/result' className="btn btn-warning card-body h-100 d-flex align-items-center mt-2 w-100">
+                    <Link to='/result' className="btn btn-warning w-100">
                         <div className="text-center w-100">
-                            <span className='h6'>Sudah divaksin dosis 1</span>
+                            <Typography variant="overline" display="block">
+                                Sudah divaksin dosis 1
+                            </Typography>
                         </div>
                     </Link>
                     {/* <Link to='/result' className="btn btn-success card-body h-100 d-flex align-items-center mt-2 w-100">
