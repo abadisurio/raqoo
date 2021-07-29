@@ -164,8 +164,9 @@ const Registration = () => {
                         {sessions.map((item, index)=>{
                             return(
                                 <Grid item key={index} xs={4}>
-                                    <Box textAlign="center">
+                                    <Box textAlign="center" height="100%">
                                         <Button
+                                            style={{height : "100%"}}
                                             variant="contained"
                                             disabled={item===0}
                                             fullWidth
