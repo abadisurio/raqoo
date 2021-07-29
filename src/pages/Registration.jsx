@@ -45,28 +45,24 @@ const Registration = () => {
 
     const facilities = [
         {
-            'name': 'RS Manakek',
-            'location': 'Jakarta'
-        },
-        {
-            'name': 'RS tsgrhsrth',
+            'name': 'Rumah Sakit Ibu dan Anak Selasih medika',
             'location': 'Bekasi'
         },
         {
-            'name': 'RS Mahsrhurgtynakek',
+            'name': 'Rumah Sakit Islam Pondok Kopi',
+            'location': 'Jakarta'
+        },
+        {
+            'name': 'Stadion Utama Gelora Bung Karno',
             'location': 'Bandung'
         },
         {
-            'name': 'RS Manakq4eq4eek',
-            'location': 'Jakarta'
+            'name': 'Rumah Sakit Omni Pekayon',
+            'location': 'Bekasi'
         },
         {
-            'name': 'RS rtfdghyrjuhManakek',
-            'location': 'Jakarta'
-        },
-        {
-            'name': 'RS Manaktrgyhrgtek',
-            'location': 'Jakarta'
+            'name': 'Rumah saSakit Primaya',
+            'location': 'Bekasi'
         },
     ]
 
